@@ -7,7 +7,7 @@ authors = ["Pradeep Gowda <pgowda@proofpoint.com>"]
 [dependencies]
 glob = "*"
 clap = "*"
-# clippy = "*"
+clippy = "*"
 
 
 [dependencies.url]
