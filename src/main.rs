@@ -49,7 +49,7 @@ fn main() {
             Ok(path) => {
                 let data = &[("code".to_string(), read_file(path.to_str().unwrap().to_string()))];
                 let s = serialize(data);
-                let fname = path.to_str().unwrap().to_string().split('/').last().unwrap().to_string();
+                let fname = path.file_name().unwrap().to_string_lossy();
                 println!("- [{:?}](http://play.rust-lang.org/?{})", fname, s);
             },
             Err(e) => println!("{:?}", e),
