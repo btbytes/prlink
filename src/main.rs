@@ -1,5 +1,5 @@
-// #![feature(plugin)]
-// #![plugin(clippy)]
+#![feature(plugin)]
+#![plugin(clippy)]
 
 
 extern crate clap;
@@ -47,7 +47,7 @@ fn main() {
     for entry in glob(absolute_path.to_str().unwrap()).unwrap() {
         match entry {
             Ok(path) => {
-                let data = &[("code".to_string(), read_file(path.to_str().unwrap().to_string()))];
+                let data = &[("code".to_owned(), read_file(path.to_str().unwrap().to_owned()))];
                 let s = serialize(data);
                 let fname = path.file_name().unwrap().to_string_lossy();
                 println!("- [{:?}](http://play.rust-lang.org/?{})", fname, s);
