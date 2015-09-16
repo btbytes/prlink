@@ -1,0 +1,15 @@
+[package]
+name = "prlink"
+version = "0.1.0"
+authors = ["Pradeep Gowda <pgowda@proofpoint.com>"]
+
+
+[dependencies]
+glob = "*"
+clap = "*"
+# clippy = "*"
+
+
+[dependencies.url]
+git = "https://github.com/servo/rust-url"
+features = ["query_encoding"]
