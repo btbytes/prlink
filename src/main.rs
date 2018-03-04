@@ -10,7 +10,7 @@ use clap::{App, Arg};
 use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
-use url::form_urlencoded::{serialize};
+use url::form_urlencoded::Serializer;
 use glob::glob;
 use std::path::PathBuf;
 
@@ -48,7 +48,9 @@ fn main() {
         match entry {
             Ok(path) => {
                 let data = &[("code".to_owned(), read_file(path.to_str().unwrap().to_owned()))];
-                let s = serialize(data);
+                let s = Serializer::new(String::new())
+                    .extend_pairs(data)
+                    .finish();
                 let fname = path.file_name().unwrap().to_string_lossy();
                 println!("- [{:?}](https://play.rust-lang.org/?{})", fname, s);
             },
