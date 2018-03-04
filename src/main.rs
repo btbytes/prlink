@@ -27,6 +27,14 @@ fn read_file(path: &str) -> String {
     }
 }
 
+fn linkify_file(path: &PathBuf) -> String {
+    let data = &[("code".to_owned(), read_file(path.to_str().unwrap()))];
+    let s = Serializer::new(String::new())
+        .extend_pairs(data)
+        .finish();
+    let fname = path.file_name().unwrap().to_string_lossy();
+    format!("- [{:?}](https://play.rust-lang.org/?{})", fname, s)
+}
 
 fn main() {
     let matches = App::new("prlink")
@@ -47,12 +55,7 @@ fn main() {
     for entry in glob(absolute_path.to_str().unwrap()).unwrap() {
         match entry {
             Ok(path) => {
-                let data = &[("code".to_owned(), read_file(path.to_str().unwrap()))];
-                let s = Serializer::new(String::new())
-                    .extend_pairs(data)
-                    .finish();
-                let fname = path.file_name().unwrap().to_string_lossy();
-                println!("- [{:?}](https://play.rust-lang.org/?{})", fname, s);
+                println!("{}", linkify_file(&path));
             },
             Err(e) => println!("{:?}", e),
         }
