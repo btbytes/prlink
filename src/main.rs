@@ -15,7 +15,7 @@ use glob::glob;
 use std::path::PathBuf;
 
 
-fn read_file(path: String) -> String {
+fn read_file(path: &str) -> String {
     let mut file = match File::open(&path) {
         Err(why) => panic!("couldn't open {}: {}", path, Error::description(&why)),
         Ok(file) => file,
@@ -47,7 +47,7 @@ fn main() {
     for entry in glob(absolute_path.to_str().unwrap()).unwrap() {
         match entry {
             Ok(path) => {
-                let data = &[("code".to_owned(), read_file(path.to_str().unwrap().to_owned()))];
+                let data = &[("code".to_owned(), read_file(path.to_str().unwrap()))];
                 let s = Serializer::new(String::new())
                     .extend_pairs(data)
                     .finish();
