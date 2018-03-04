@@ -7,7 +7,7 @@ authors = ["Pradeep Gowda <pradeep@btbytes.com>"]
 [dependencies]
 glob = "*"
 clap = "*"
-clippy = "*"
+clippy = { version = "*", optional = true }
 
 [dependencies.url]
 version = "1.7.0"
