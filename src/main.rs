@@ -50,7 +50,7 @@ fn main() {
                 let data = &[("code".to_owned(), read_file(path.to_str().unwrap().to_owned()))];
                 let s = serialize(data);
                 let fname = path.file_name().unwrap().to_string_lossy();
-                println!("- [{:?}](http://play.rust-lang.org/?{})", fname, s);
+                println!("- [{:?}](https://play.rust-lang.org/?{})", fname, s);
             },
             Err(e) => println!("{:?}", e),
         }
